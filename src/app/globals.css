@@ -1,0 +1,475 @@
+@import "tailwindcss";
+
+/* ───────────── Márkaszínek és betűk ───────────── */
+
+@theme {
+  --color-paper: #f2ece1;
+  --color-paper-deep: #e8dfcf;
+  --color-stone: #cdbda6;
+  --color-ink: #1f1d1a;
+  --color-forest: #1f3b30;
+  --color-forest-deep: #14261f;
+  --color-amber: #a8641f;
+  --color-wood: #3a2518;
+  --color-night: #171411;
+
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+}
+
+/* A napszakhoz kötött színek – a tone (day/night) váltja őket. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-notice: var(--notice);
+}
+
+/* Regisztrált változók, hogy a reggel–este váltás lágyan áttűnjön. */
+@property --bg { syntax: "<color>"; inherits: true; initial-value: #f2ece1; }
+@property --fg { syntax: "<color>"; inherits: true; initial-value: #1f1d1a; }
+@property --surface { syntax: "<color>"; inherits: true; initial-value: #e8dfcf; }
+@property --muted { syntax: "<color>"; inherits: true; initial-value: #655e54; }
+@property --line { syntax: "<color>"; inherits: true; initial-value: #cfc6b6; }
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #1f3b30; }
+@property --accent-fg { syntax: "<color>"; inherits: true; initial-value: #f2ece1; }
+@property --stage-wall { syntax: "<color>"; inherits: true; initial-value: #e4d8c5; }
+@property --stage-counter { syntax: "<color>"; inherits: true; initial-value: #cdbda6; }
+
+:root,
+[data-tone="day"] {
+  --bg: #f2ece1;
+  --fg: #1f1d1a;
+  --surface: #e8dfcf;
+  --muted: #655e54;
+  --line: #cfc6b6;
+  --accent: #1f3b30;
+  --accent-fg: #f2ece1;
+  --stage-wall: #e4d8c5;
+  --stage-counter: #cdbda6;
+  --notice: #8f5116;
+  --emboss-hi: rgb(255 255 255 / 0.95);
+  --emboss-lo: rgb(104 84 52 / 0.42);
+  color-scheme: light;
+}
+
+[data-tone="night"] {
+  --bg: #171411;
+  --fg: #ece4d4;
+  --surface: #211c17;
+  --muted: #a39887;
+  --line: #3a332b;
+  --accent: #ece4d4;
+  --accent-fg: #171411;
+  --stage-wall: #1b1511;
+  --stage-counter: #3a2518;
+  --notice: #d79c58;
+  --emboss-hi: rgb(255 236 205 / 0.16);
+  --emboss-lo: rgb(0 0 0 / 0.7);
+  color-scheme: dark;
+}
+
+.tone-root {
+  transition:
+    --bg 0.9s ease,
+    --fg 0.9s ease,
+    --surface 0.9s ease,
+    --muted 0.9s ease,
+    --line 0.9s ease,
+    --accent 0.9s ease,
+    --accent-fg 0.9s ease,
+    --stage-wall 0.9s ease,
+    --stage-counter 0.9s ease;
+}
+
+/* ───────────── Alapok ───────────── */
+
+html {
+  background: #f2ece1;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+html[data-tone="night"] {
+  background: #171411;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+button,
+summary,
+[role="button"] {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* ───────────── Elrendezés és tipográfia ───────────── */
+
+@utility wrap {
+  width: 100%;
+  max-width: 86rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@utility display-xl {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 1.1rem + 5.4vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+@utility display-lg {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(2.125rem, 1.3rem + 3.3vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+@utility display-md {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(1.625rem, 1.25rem + 1.5vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@utility lead {
+  font-family: var(--font-serif);
+  font-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+  line-height: 1.5;
+}
+
+@utility prose-serif {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+/* ───────────── Gombok, mezők ───────────── */
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3.25rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+@utility btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  &:hover {
+    background: color-mix(in srgb, var(--accent) 86%, var(--accent-fg));
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+@utility btn-outline {
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  &:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+}
+
+@utility link-line {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color 0.2s ease;
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+.field-input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.field-input:hover {
+  border-color: var(--muted);
+}
+
+.field-input:focus-visible {
+  outline: none;
+  border-color: var(--fg);
+  box-shadow: 0 0 0 1px var(--fg);
+}
+
+.field-input[aria-invalid="true"] {
+  border-color: #b3401f;
+}
+
+[data-tone="night"] .field-input[aria-invalid="true"] {
+  border-color: #e58a66;
+}
+
+.field-error {
+  color: #a53a1b;
+}
+
+[data-tone="night"] .field-error {
+  color: #eb9a7a;
+}
+
+/* ───────────── Logó: a záró „o” bevágásával ───────────── */
+
+.logo {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.logo-o {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-o::after {
+  content: "";
+  position: absolute;
+  top: 0.335em;
+  right: 0.03em;
+  width: 0.2em;
+  height: 0.05em;
+  background: var(--logo-cut, var(--bg));
+  transform: rotate(-45deg);
+}
+
+/* ───────────── Vaknyomás: a dombornyomott vonal ───────────── */
+
+.emboss {
+  overflow: visible;
+  filter: drop-shadow(-1px -1px 0.5px var(--emboss-hi))
+    drop-shadow(1.2px 1.6px 0.9px var(--emboss-lo));
+}
+
+.emboss path {
+  fill: none;
+  stroke: var(--emboss-face, var(--bg));
+  stroke-width: var(--emboss-width, 3.5px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ───────────── 3D színpad ─────────────
+   A --bx / --bb / --bh / --bc értékek mondják meg, hol áll az üveg a
+   színpadon (vízszintes közép, talp, magasság, pult hátsó éle – 0–1 arány).
+   Ugyanezeket olvassa a 3D jelenet és a helyettesítő rajz is, így a kettő
+   fedésben van. */
+
+.stage {
+  --bx: 0.5;
+  --bb: 0.13;
+  --bh: 0.7;
+  --bc: 0.229;
+  overflow: hidden;
+  background: linear-gradient(
+    to top,
+    var(--stage-counter) 0,
+    var(--stage-counter) calc(var(--bc) * 100%),
+    var(--stage-wall) calc(var(--bc) * 100%)
+  );
+}
+
+.stage-hero {
+  --bx: 0.5;
+  --bb: 0.08;
+  --bh: 0.46;
+  --bc: 0.125;
+}
+
+@media (width >= 64rem) {
+  .stage-hero {
+    --bx: 0.7;
+    --bb: 0.13;
+    --bh: 0.62;
+    --bc: 0.209;
+  }
+}
+
+.stage-placeholder {
+  position: absolute;
+  left: calc(var(--bx) * 100%);
+  bottom: calc(var(--bb) * 100%);
+  height: calc(var(--bh) * 100%);
+  transform: translateX(-50%);
+  aspect-ratio: 240 / 690;
+}
+
+[data-tone="night"] .stage-placeholder {
+  filter: brightness(0.7);
+}
+
+.stage-canvas {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.stage-canvas:active {
+  cursor: grabbing;
+}
+
+/* ───────────── Kosárfiók ───────────── */
+
+dialog.drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(27.5rem, 100vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--fg);
+  transform: translateX(100%);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete;
+}
+
+dialog.drawer[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  dialog.drawer[open] {
+    transform: translateX(100%);
+  }
+}
+
+dialog.drawer::backdrop {
+  background: rgb(20 17 14 / 0);
+  transition:
+    background-color 0.4s ease,
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete;
+}
+
+dialog.drawer[open]::backdrop {
+  background: rgb(20 17 14 / 0.45);
+}
+
+@starting-style {
+  dialog.drawer[open]::backdrop {
+    background: rgb(20 17 14 / 0);
+  }
+}
+
+/* ───────────── GYIK ───────────── */
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details .details-mark {
+  transition: transform 0.3s ease;
+}
+
+details[open] .details-mark {
+  transform: rotate(45deg);
+}
+
+/* ───────────── Belépő animáció ───────────── */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
