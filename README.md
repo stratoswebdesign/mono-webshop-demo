@@ -77,6 +77,17 @@ src/
 - Csökkentett mozgás beállításnál nincs automatikus ringás, görgetéshez kötött mozgás és
   váltáskori fordulat. Mobilon egyszerűbb üveganyag és kevesebb sokszög fut.
 
+## GitHub Pages
+
+A `main` ágra kerülő változások után a `.github/workflows/pages.yml` lefuttatja a teszteket,
+statikus exportot készít, és közzéteszi GitHub Pagesen. A build ilyenkor a `PAGES_BASE_PATH`
+környezeti változóból kapja az alútvonalat (a repó nevét); helyben ez nincs beállítva, így a
+fejlesztés változatlan. Helyi kipróbálás:
+
+```bash
+PAGES_BASE_PATH=/mono-webshop-demo npm run build   # az eredmény az out/ mappában
+```
+
 ## WooCommerce-átállás
 
 Lásd: [docs/woocommerce-atallas.md](docs/woocommerce-atallas.md).

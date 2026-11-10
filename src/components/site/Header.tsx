@@ -5,12 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { mainNav, secondaryNav, site } from "@/data/site";
 import { useCart } from "@/lib/commerce/cart-store";
+import { normalizePath } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
 import { useShell } from "./SiteShell";
 
 export function Header() {
-  const pathname = usePathname();
+  const pathname = normalizePath(usePathname());
   const { openCart } = useShell();
   const { totals, hydrated } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);

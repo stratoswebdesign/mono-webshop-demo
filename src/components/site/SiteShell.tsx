@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import type { Tone, Variant } from "@/data/products";
+import { normalizePath } from "@/lib/asset";
 import { getSingle, listSingles, productHref } from "@/lib/commerce/catalog";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { Footer } from "./Footer";
@@ -32,7 +33,7 @@ const NIGHT_PATHS = new Set(
 );
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const pathname = normalizePath(usePathname());
   const [homeVariant, setHomeVariant] = useState<Variant>("classic");
   const [cartOpen, setCartOpen] = useState(false);
 

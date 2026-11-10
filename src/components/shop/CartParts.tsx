@@ -8,6 +8,7 @@ import { bundleSuggestion, type CartTotals } from "@/lib/commerce/cart";
 import { cartActions, useCart } from "@/lib/commerce/cart-store";
 import { getSingle, productHref } from "@/lib/commerce/catalog";
 import { formatPrice } from "@/lib/commerce/format";
+import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { QuantityStepper } from "./QuantityStepper";
 
@@ -32,7 +33,7 @@ export function CartLines({ onNavigate }: { onNavigate?: () => void }) {
             aria-hidden="true"
             className="relative block h-24 w-[4.5rem] shrink-0 overflow-hidden bg-surface"
           >
-            <Image src={product.thumbImage.src} alt="" fill sizes="72px" className="object-cover" />
+            <Image src={asset(product.thumbImage.src)} alt="" fill sizes="72px" className="object-cover" />
           </Link>
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-3">

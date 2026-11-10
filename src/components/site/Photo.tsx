@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ProductImage } from "@/data/products";
+import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 
 /** Kivágott fotó: a keret adja az arányt, a `focus` a kivágás súlypontját. */
@@ -20,7 +21,7 @@ export function Photo({
   return (
     <div className={cn("relative overflow-hidden bg-surface", className)}>
       <Image
-        src={image.src}
+        src={asset(image.src)}
         alt={image.alt}
         fill
         sizes={sizes}

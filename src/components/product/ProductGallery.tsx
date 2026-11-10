@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { SingleProduct } from "@/data/products";
 import { BottleIllustration } from "@/components/three/BottleIllustration";
 import { ProductStage } from "@/components/three/ProductStage";
+import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 
 /** Termékgaléria: forgatható 3D nézet és környezeti fotók között vált. */
@@ -32,7 +33,7 @@ export function ProductGallery({ product }: { product: SingleProduct }) {
         {photo && (
           <Image
             key={photo.src}
-            src={photo.src}
+            src={asset(photo.src)}
             alt={photo.alt}
             fill
             sizes="(min-width: 1024px) 56vw, 100vw"
@@ -63,7 +64,7 @@ export function ProductGallery({ product }: { product: SingleProduct }) {
             aria-label={`Fotó: ${image.alt}`}
             className={thumb(selected === index)}
           >
-            <Image src={image.src} alt="" fill sizes="80px" className="object-cover" />
+            <Image src={asset(image.src)} alt="" fill sizes="80px" className="object-cover" />
           </button>
         ))}
       </div>
