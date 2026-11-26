@@ -13,8 +13,6 @@ export interface Routine {
   /** A kép kivágásának súlypontja (CSS object-position). */
   heroFocus: string;
   moments: { title: string; text: string }[];
-  secondImage: ProductImage;
-  secondFocus: string;
   closing: { title: string; text: string };
   other: { question: string; label: string; href: string };
 }
@@ -46,13 +44,6 @@ export const routines: Record<Variant, Routine> = {
         text: "Visszacsavarod, és mész tovább. Az üveg a pulton marad holnap reggelig.",
       },
     ],
-    secondImage: {
-      src: "/images/reggel-furdoszoba.webp",
-      alt: "mono menthol drops üveg a fürdőszobai kőpulton, meleg fényben",
-      width: 1122,
-      height: 1402,
-    },
-    secondFocus: "40% 60%",
     closing: {
       title: "a pulton a helye.",
       text: "Borostyánbarna üveg, fekete pipettás kupak, törtfehér texturált címke. 30 ml.",
@@ -86,13 +77,6 @@ export const routines: Record<Variant, Routine> = {
         text: "Visszacsavarod, leteszed. Az üveg az éjjeliszekrényen marad holnap estig.",
       },
     ],
-    secondImage: {
-      src: "/images/sleep-doboz.webp",
-      alt: "mono sleep üveg a mély erdőzöld doboza előtt",
-      width: 650,
-      height: 940,
-    },
-    secondFocus: "50% 50%",
     closing: {
       title: "az éjjeliszekrényen a helye.",
       text: "Borostyánbarna üveg, fekete pipettás kupak, mély erdőzöld texturált címke. 30 ml.",

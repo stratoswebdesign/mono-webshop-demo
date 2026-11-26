@@ -37,17 +37,17 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     >
       <div className="flex h-full flex-col">
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-5">
-          <h2 id="kosarfiok-cim" className="text-lg font-medium">
+          <h2 id="kosarfiok-cim" className="text-[1.0625rem] font-normal">
             Kosár{totals.itemCount > 0 && <span className="text-muted"> · {totals.itemCount} db</span>}
           </h2>
-          <button type="button" onClick={onClose} className="-mr-2 h-11 px-2 text-[0.9375rem] font-medium">
+          <button type="button" onClick={onClose} className="-mr-2 h-11 px-2 text-[0.9375rem] font-normal">
             Bezárás
           </button>
         </div>
 
         {totals.itemCount === 0 ? (
           <div className="flex flex-1 flex-col items-start justify-center gap-6 px-5">
-            <p className="display-md lowercase">a kosarad még üres.</p>
+            <p className="title lowercase">a kosarad még üres.</p>
             <Link href="/termekek" onClick={onClose} className="btn btn-primary">
               Termékek megtekintése
             </Link>

@@ -9,9 +9,9 @@ import { QuantityStepper } from "@/components/shop/QuantityStepper";
 export function PurchasePanel({ productId, name }: { productId: ProductId; name: string }) {
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="flex flex-wrap items-stretch gap-3">
+    <div className="flex items-stretch gap-3">
       <QuantityStepper value={quantity} onChange={setQuantity} label={name} />
-      <AddToCartButton productId={productId} quantity={quantity} className="min-w-52 flex-1 sm:flex-none" />
+      <AddToCartButton productId={productId} quantity={quantity} className="flex-1" />
     </div>
   );
 }

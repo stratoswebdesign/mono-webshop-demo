@@ -46,7 +46,7 @@ export function CheckoutView() {
   if (totals.itemCount === 0 && !submitting) {
     return (
       <div className="mt-10 max-w-xl">
-        <p className="lead text-muted">A pénztárhoz előbb tegyél valamit a kosárba.</p>
+        <p className="lede text-muted">A pénztárhoz előbb tegyél valamit a kosárba.</p>
         <Link href="/termekek" className="btn btn-primary mt-8">
           Termékek megtekintése
         </Link>
@@ -83,7 +83,7 @@ export function CheckoutView() {
     className?: string,
   ) => (
     <div className={className}>
-      <label htmlFor={fieldId(name)} className="mb-1.5 block text-sm font-medium">
+      <label htmlFor={fieldId(name)} className="label mb-1 block text-muted">
         {label}
       </label>
       <input
@@ -115,13 +115,13 @@ export function CheckoutView() {
         </p>
 
         {errorCount > 0 && (
-          <p role="alert" className="field-error mt-6 text-[0.9375rem] font-medium">
+          <p role="alert" className="field-error mt-6 text-[0.9375rem] font-normal">
             {errorCount} mezőt még javítani kell a rendelés leadásához.
           </p>
         )}
 
         <fieldset className="mt-10">
-          <legend className="display-md lowercase">kapcsolat</legend>
+          <legend className="title lowercase">kapcsolat</legend>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {field("email", "E-mail-cím", { type: "email", autoComplete: "email", inputMode: "email" })}
             {field("phone", "Telefonszám", {
@@ -134,7 +134,7 @@ export function CheckoutView() {
         </fieldset>
 
         <fieldset className="mt-12">
-          <legend className="display-md lowercase">szállítási cím</legend>
+          <legend className="title lowercase">szállítási cím</legend>
           <div className="mt-6 grid gap-5 sm:grid-cols-6">
             {field("lastName", "Vezetéknév", { autoComplete: "family-name" }, "sm:col-span-3")}
             {field("firstName", "Keresztnév", { autoComplete: "given-name" }, "sm:col-span-3")}
@@ -147,7 +147,7 @@ export function CheckoutView() {
             {field("city", "Település", { autoComplete: "address-level2" }, "sm:col-span-4")}
             {field("address", "Utca, házszám", { autoComplete: "street-address" }, "sm:col-span-6")}
             <div className="sm:col-span-6">
-              <label htmlFor={fieldId("note")} className="mb-1.5 block text-sm font-medium">
+              <label htmlFor={fieldId("note")} className="label mb-1 block text-muted">
                 Megjegyzés a futárnak <span className="font-normal text-muted">(nem kötelező)</span>
               </label>
               <textarea
@@ -163,7 +163,7 @@ export function CheckoutView() {
         </fieldset>
 
         <section className="mt-12" aria-labelledby={`${formId}-szallitas`}>
-          <h2 id={`${formId}-szallitas`} className="display-md lowercase">
+          <h2 id={`${formId}-szallitas`} className="title lowercase">
             szállítás és fizetés
           </h2>
           <dl className="mt-6 divide-y divide-line border-y border-line text-[0.9375rem]">
@@ -213,7 +213,7 @@ export function CheckoutView() {
       <aside aria-label="Rendelés összesítése" className="lg:col-span-5 xl:col-span-4 xl:col-start-9">
         <div className="bg-surface p-6 lg:sticky lg:top-24">
           <div className="flex items-baseline justify-between">
-            <h2 className="text-lg font-medium">A rendelésed</h2>
+            <h2 className="text-[1.0625rem] font-normal">A rendelésed</h2>
             <Link href="/kosar" className="link-line text-sm">
               Módosítás
             </Link>

@@ -36,7 +36,8 @@ adatokat – árat, szállítási díjat egyik sem tartalmaz beégetve.
   ellenőrzése.
 - Cégadatok, elérhetőségek, ÁSZF, adatkezelési tájékoztató, sütikezelés.
 - Végleges árak, szállítási módok és díjak, fizetési módok, számlázás.
-- Végleges termékfotók és – ha lesz – kész 3D modell; a nyomdai címkegrafika és a dombornyomott
-  vonal végleges rajza (`src/lib/motif.ts`).
+- A nyomdai címkegrafika és a dombornyomott vonal végleges rajza (`src/lib/motif.ts`,
+  `src/components/scene/label-art.ts`); ezek alapján a renderek újragenerálhatók (`blender/`).
+  A doboz 3D modellje és végleges termékfotók, ha a renderek mellé fotó is kell.
 - Rendelés-visszaigazoló e-mailek, készletkezelés, analitika.
 - A demó jelölések eltávolítása, a keresőrobotok engedélyezése (`app/layout.tsx`, `robots`).

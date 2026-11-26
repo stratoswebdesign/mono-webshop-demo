@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="wrap pt-12 lg:pt-20">
+    <div className="wrap pt-32 lg:pt-40">
       <div className="grid gap-x-14 gap-y-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <h1 className="display-lg lowercase">kapcsolat</h1>
-          <p className="lead mt-6 max-w-md text-muted">
+          <h1 className="statement lowercase">kapcsolat</h1>
+          <p className="lede mt-6 max-w-md text-muted">
             Kérdésed van a termékekről vagy a rendelésről? Előbb érdemes megnézni a{" "}
             <Link href="/gyik" className="link-line text-fg">
               gyakori kérdéseket

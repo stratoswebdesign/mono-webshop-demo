@@ -3,7 +3,7 @@ export const mainNav = [
   { href: "/termekek", label: "Termékek" },
   { href: "/reggel", label: "Reggel" },
   { href: "/este", label: "Este" },
-  { href: "/paros-csomag", label: "Páros csomag" },
+  { href: "/paros-csomag", label: "Páros" },
   { href: "/tortenet", label: "Történet" },
 ];
 

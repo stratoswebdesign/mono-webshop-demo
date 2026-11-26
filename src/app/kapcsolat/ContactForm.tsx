@@ -29,9 +29,9 @@ export function ContactForm() {
   if (done) {
     return (
       <div role="status" className="bg-surface p-8">
-        <p className="eyebrow">Demó</p>
-        <p className="display-md mt-3 lowercase">az űrlap rendben van.</p>
-        <p className="prose-serif mt-4 text-muted">
+        <p className="label">Demó</p>
+        <p className="title mt-3 lowercase">az űrlap rendben van.</p>
+        <p className="copy mt-4 text-muted">
           Ez a bemutató oldal nem küld üzenetet, ezért amit beírtál, nem jutott el senkihez, és
           nem is tároltuk. Az éles webshopban itt kapsz majd visszaigazolást.
         </p>
@@ -80,7 +80,7 @@ export function ContactForm() {
       className="space-y-5"
     >
       <div>
-        <label htmlFor={`${id}-name`} className="mb-1.5 block text-sm font-medium">
+        <label htmlFor={`${id}-name`} className="label mb-1 block text-muted">
           Név
         </label>
         <input
@@ -96,7 +96,7 @@ export function ContactForm() {
         {error("name")}
       </div>
       <div>
-        <label htmlFor={`${id}-email`} className="mb-1.5 block text-sm font-medium">
+        <label htmlFor={`${id}-email`} className="label mb-1 block text-muted">
           E-mail-cím
         </label>
         <input
@@ -114,7 +114,7 @@ export function ContactForm() {
         {error("email")}
       </div>
       <div>
-        <label htmlFor={`${id}-message`} className="mb-1.5 block text-sm font-medium">
+        <label htmlFor={`${id}-message`} className="label mb-1 block text-muted">
           Üzenet
         </label>
         <textarea

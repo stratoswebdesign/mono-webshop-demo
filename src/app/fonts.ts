@@ -1,16 +1,17 @@
-import { Newsreader, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Outfit } from "next/font/google";
 
-/** A csomagolás betűvilágát idéző geometrikus groteszk: címsorok, felület. */
+/** A csomagolás betűvilágát idéző geometrikus groteszk: címkék, felület. */
 export const outfit = Outfit({
   subsets: ["latin", "latin-ext"],
   variable: "--font-outfit",
   display: "swap",
 });
 
-/** Olvasószöveg – a dobozba tett nyomtatott tájékoztató hangja. */
-export const newsreader = Newsreader({
+/** A kevés, halk kijelentés betűje. */
+export const cormorant = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
+  weight: ["300", "400"],
   style: ["normal", "italic"],
-  variable: "--font-newsreader",
+  variable: "--font-cormorant",
   display: "swap",
 });

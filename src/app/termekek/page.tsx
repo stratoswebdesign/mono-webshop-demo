@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProductCard } from "@/components/shop/ProductCard";
+import { ProductTile } from "@/components/shop/ProductTile";
 import { ShippingNote } from "@/components/shop/ShippingNote";
 import { getBundle, listSingles } from "@/lib/commerce/catalog";
 
@@ -9,32 +9,34 @@ export const metadata: Metadata = {
 };
 
 export default function ProductsPage() {
+  const bundle = getBundle();
   return (
-    <div className="wrap pt-12 lg:pt-20">
-      <div className="grid gap-x-10 gap-y-5 lg:grid-cols-12">
-        <h1 className="display-lg lowercase lg:col-span-7">két üveg és egy páros.</h1>
-        <div className="self-end lg:col-span-4 lg:col-start-9">
-          <p className="lead text-muted">
-            Folyékony étrend-kiegészítők 30 ml-es borostyánüvegben, pipettás kupakkal.
-          </p>
-          <ShippingNote className="mt-3 text-sm text-muted" />
+    <>
+      <div className="wrap flex flex-wrap items-end justify-between gap-x-10 gap-y-4 pb-8 pt-32 lg:pb-10 lg:pt-40">
+        <div>
+          <p className="label text-muted">Termékek</p>
+          <h1 className="statement-lg mt-3 lowercase">két üveg és egy páros.</h1>
         </div>
+        <ShippingNote className="copy max-w-xs text-muted" />
       </div>
 
-      <div className="mt-14 grid gap-x-10 gap-y-20 md:grid-cols-2 lg:mt-20">
+      <div className="grid gap-px md:grid-cols-2">
         {listSingles().map((product) => (
-          <ProductCard
+          <ProductTile
             key={product.id}
             product={product}
-            aspect="aspect-[4/5]"
-            sizes="(min-width: 768px) 48vw, 100vw"
+            sizes="(min-width: 768px) 50vw, 100vw"
             priority
+            className="aspect-[4/5] md:aspect-auto md:h-[88svh] md:min-h-[34rem]"
           />
         ))}
-        <div className="md:col-span-2">
-          <ProductCard product={getBundle()} aspect="aspect-[1568/1003] lg:aspect-[2/1]" sizes="100vw" />
-        </div>
       </div>
-    </div>
+      <ProductTile
+        product={bundle}
+        image={bundle.heroImage}
+        sizes="100vw"
+        className="mt-px aspect-[4/5] md:aspect-auto md:h-[80svh] md:min-h-[32rem]"
+      />
+    </>
   );
 }

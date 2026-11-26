@@ -2,19 +2,19 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import type { Tone, Variant } from "@/data/products";
+import type { Tone } from "@/data/products";
 import { normalizePath } from "@/lib/asset";
-import { getSingle, listSingles, productHref } from "@/lib/commerce/catalog";
+import { listSingles, productHref } from "@/lib/commerce/catalog";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
 interface ShellContext {
   tone: Tone;
-  /** A főoldali nyitószakaszban kiválasztott termék. */
-  homeVariant: Variant;
-  setHomeVariant: (variant: Variant) => void;
+  /** A főoldali utazás állítja: épp nappali vagy esti jelenet látszik. */
+  setHomeTone: (tone: Tone) => void;
   openCart: () => void;
+  cartOpen: boolean;
 }
 
 const Context = createContext<ShellContext | null>(null);
@@ -34,11 +34,11 @@ const NIGHT_PATHS = new Set(
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = normalizePath(usePathname());
-  const [homeVariant, setHomeVariant] = useState<Variant>("classic");
+  const [homeTone, setHomeTone] = useState<Tone>("day");
   const [cartOpen, setCartOpen] = useState(false);
+  const isHome = pathname === "/";
 
-  const tone: Tone =
-    pathname === "/" ? getSingle(homeVariant).tone : NIGHT_PATHS.has(pathname) ? "night" : "day";
+  const tone: Tone = isHome ? homeTone : NIGHT_PATHS.has(pathname) ? "night" : "day";
 
   useEffect(() => {
     document.documentElement.dataset.tone = tone;
@@ -52,8 +52,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const closeCart = useCallback(() => setCartOpen(false), []);
 
   const value = useMemo(
-    () => ({ tone, homeVariant, setHomeVariant, openCart }),
-    [tone, homeVariant, openCart],
+    () => ({ tone, setHomeTone, openCart, cartOpen }),
+    [tone, openCart, cartOpen],
   );
 
   return (
@@ -65,7 +65,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         >
           Ugrás a tartalomra
         </a>
-        <Header />
+        <Header overlay={isHome} />
         <main id="tartalom" className="flex-1">
           {children}
         </main>

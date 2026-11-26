@@ -15,7 +15,7 @@ export function CartView() {
   if (totals.itemCount === 0) {
     return (
       <div className="mt-10 max-w-xl">
-        <p className="lead text-muted">
+        <p className="lede text-muted">
           A kosarad még üres. Nézd meg a két üveget, vagy válaszd együtt a páros csomagban.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -44,7 +44,7 @@ export function CartView() {
 
       <aside aria-label="Összesítés" className="lg:col-span-5 xl:col-span-4 xl:col-start-9">
         <div className="bg-surface p-6 lg:sticky lg:top-24">
-          <h2 className="text-lg font-medium">Összesítés</h2>
+          <h2 className="text-[1.0625rem] font-normal">Összesítés</h2>
           <FreeShippingMeter totals={totals} className="mt-5" />
           <TotalsRows totals={totals} className="mt-6" />
           <Link href="/penztar" className="btn btn-primary mt-6 w-full">

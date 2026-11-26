@@ -3,57 +3,50 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { SingleProduct } from "@/data/products";
-import { BottleIllustration } from "@/components/three/BottleIllustration";
-import { ProductStage } from "@/components/three/ProductStage";
+import { ProductViewer } from "@/components/scene/ProductViewer";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 
-/** Termékgaléria: forgatható 3D nézet és környezeti fotók között vált. */
+/** Termékgaléria: forgatható 3D nézet és renderelt/fotózott képek között vált. */
 export function ProductGallery({ product }: { product: SingleProduct }) {
-  // -1 = 3D nézet, egyébként a fotó sorszáma
+  // -1 = 3D nézet, egyébként a kép sorszáma
   const [selected, setSelected] = useState(-1);
   const photo = selected >= 0 ? product.gallery[selected] : null;
 
   const thumb = (active: boolean) =>
     cn(
-      "relative h-20 w-16 shrink-0 overflow-hidden transition-opacity sm:h-24 sm:w-[4.75rem]",
-      active ? "outline outline-1 outline-offset-2 outline-fg" : "opacity-70 hover:opacity-100",
+      "relative h-14 w-11 shrink-0 overflow-hidden transition-opacity duration-500",
+      active ? "opacity-100 outline outline-1 outline-offset-[3px] outline-fg" : "opacity-55 hover:opacity-100",
     );
 
   return (
-    <div>
-      <div className="relative aspect-[4/5] overflow-hidden lg:aspect-auto lg:h-[calc(100svh-9rem)] lg:max-h-[52rem] lg:min-h-[34rem]">
-        {/* A 3D színpad rejtve is betöltve marad, így visszaváltáskor azonnal ott van. */}
-        <ProductStage
-          variant={product.id}
-          scrollLinked
-          paused={photo !== null}
-          className={cn("absolute inset-0", photo && "invisible")}
+    <div className="relative h-[78svh] min-h-[30rem] lg:sticky lg:top-0 lg:h-svh">
+      {/* A 3D színpad rejtve is betöltve marad, így visszaváltáskor azonnal ott van. */}
+      <ProductViewer variant={product.id} className={cn("absolute inset-0", photo && "invisible")} />
+      {photo && (
+        <Image
+          key={photo.src}
+          src={asset(photo.src)}
+          alt={photo.alt}
+          fill
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="fade object-cover"
         />
-        {photo && (
-          <Image
-            key={photo.src}
-            src={asset(photo.src)}
-            alt={photo.alt}
-            fill
-            sizes="(min-width: 1024px) 56vw, 100vw"
-            className="rise object-cover"
-          />
-        )}
-      </div>
+      )}
 
-      <div role="group" aria-label="Nézetek" className="mt-4 flex gap-3 overflow-x-auto p-1">
+      <div
+        role="group"
+        aria-label="Nézetek"
+        className="absolute bottom-5 left-5 flex gap-3 md:left-10 lg:bottom-auto lg:left-auto lg:right-6 lg:top-1/2 lg:-translate-y-1/2 lg:flex-col"
+      >
         <button
           type="button"
           onClick={() => setSelected(-1)}
           aria-pressed={selected === -1}
           aria-label="Forgatható 3D nézet"
-          className={cn(thumb(selected === -1), "stage")}
+          className={cn(thumb(selected === -1), "grid place-items-center bg-bg/70 backdrop-blur")}
         >
-          <BottleIllustration variant={product.id} className="absolute inset-x-0 bottom-[10%] mx-auto h-[72%]" />
-          <span className="absolute left-1 top-1 bg-bg px-1 text-[0.625rem] font-medium tracking-wide text-fg">
-            3D
-          </span>
+          <span className="label text-[0.5625rem]">3D</span>
         </button>
         {product.gallery.map((image, index) => (
           <button
@@ -61,10 +54,10 @@ export function ProductGallery({ product }: { product: SingleProduct }) {
             type="button"
             onClick={() => setSelected(index)}
             aria-pressed={selected === index}
-            aria-label={`Fotó: ${image.alt}`}
+            aria-label={`Kép: ${image.alt}`}
             className={thumb(selected === index)}
           >
-            <Image src={asset(image.src)} alt="" fill sizes="80px" className="object-cover" />
+            <Image src={asset(image.src)} alt="" fill sizes="44px" className="object-cover" />
           </button>
         ))}
       </div>

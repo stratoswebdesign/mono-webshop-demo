@@ -38,12 +38,12 @@ export function CartLines({ onNavigate }: { onNavigate?: () => void }) {
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <Link href={productHref(product)} onClick={onNavigate} className="font-medium">
+                <Link href={productHref(product)} onClick={onNavigate} className="font-normal">
                   {product.name}
                 </Link>
                 <p className="mt-0.5 text-sm text-muted">{lineDetail(product)}</p>
               </div>
-              <p className="shrink-0 font-medium tabular-nums">{formatPrice(lineTotal)}</p>
+              <p className="shrink-0 font-normal tabular-nums">{formatPrice(lineTotal)}</p>
             </div>
             <div className="mt-3 flex items-center justify-between gap-3">
               <QuantityStepper
@@ -76,13 +76,13 @@ export function BundleHint({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-wrap items-center justify-between gap-x-6 gap-y-3 bg-surface p-4", className)}>
       <p className="text-[0.9375rem]">
-        Páros csomagként <strong className="font-medium">{formatPrice(suggestion.saving)}</strong>{" "}
+        Páros csomagként <strong className="font-normal">{formatPrice(suggestion.saving)}</strong>{" "}
         kedvezőbb.
       </p>
       <button
         type="button"
         onClick={cartActions.convertPairsToBundle}
-        className="link-line text-[0.9375rem] font-medium"
+        className="link-line text-[0.9375rem] font-normal"
       >
         Váltás páros csomagra
       </button>
@@ -103,7 +103,7 @@ export function FreeShippingMeter({ totals, className }: { totals: CartTotals; c
       <p className="text-sm">
         {remaining > 0 ? (
           <>
-            Még <strong className="font-medium tabular-nums">{formatPrice(remaining)}</strong> az
+            Még <strong className="font-normal tabular-nums">{formatPrice(remaining)}</strong> az
             ingyenes szállításig.
           </>
         ) : (
@@ -140,7 +140,7 @@ export function TotalsRows({ totals, className }: { totals: CartTotals; classNam
           {totals.shippingFee === 0 ? "Ingyenes" : formatPrice(totals.shippingFee)}
         </dd>
       </div>
-      <div className="flex items-baseline justify-between gap-4 border-t border-line pt-4 text-lg font-medium">
+      <div className="flex items-baseline justify-between gap-4 border-t border-line pt-4 text-[1.0625rem] font-normal">
         <dt>Összesen</dt>
         <dd className="tabular-nums">{formatPrice(totals.total)}</dd>
       </div>

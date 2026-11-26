@@ -33,8 +33,6 @@ interface ProductBase {
   summary: string;
   /** Kártyakép a terméklistához – környezetbe helyezett termék. */
   cardImage: ProductImage;
-  /** A kártyakép kivágásának súlypontja (CSS object-position). */
-  cardFocus?: string;
   /** Kis bélyegkép a kosárhoz – közeli termékfotó. */
   thumbImage: ProductImage;
 }
@@ -62,6 +60,8 @@ export interface BundleProduct extends ProductBase {
   contains: Variant[];
   description: string[];
   heroImage: ProductImage;
+  /** A csomagolás (dobozok) fotója. */
+  boxImage: ProductImage;
 }
 
 export type Product = SingleProduct | BundleProduct;
@@ -104,36 +104,41 @@ export const products: Record<ProductId, Product> = {
       { label: "Doboz", value: "Törtfehér texturált papírdoboz" },
     ],
     cardImage: {
-      src: "/images/reggel-napfeny.webp",
+      src: "/images/reggel-close.webp",
       alt: "mono menthol drops üveg kőpulton, reggeli napfényben",
-      width: 1122,
-      height: 1402,
+      width: 1500,
+      height: 1950,
     },
-    cardFocus: "50% 60%",
     thumbImage: {
-      src: "/images/klasszikus-doboz.webp",
-      alt: "mono menthol drops üveg a törtfehér papírdoboza előtt",
-      width: 650,
-      height: 940,
+      src: "/images/reggel-close.webp",
+      alt: "mono menthol drops üveg",
+      width: 1500,
+      height: 1950,
     },
     gallery: [
       {
+        src: "/images/reggel-close.webp",
+        alt: "mono menthol drops üveg közelről, reggeli fényben",
+        width: 1500,
+        height: 1950,
+      },
+      {
+        src: "/images/reggel-macro-label.webp",
+        alt: "A címke dombornyomott vonala közelről",
+        width: 1800,
+        height: 1200,
+      },
+      {
+        src: "/images/reggel-macro-cap.webp",
+        alt: "A bordázott kupak és a gumipipetta közelről",
+        width: 1800,
+        height: 1200,
+      },
+      {
         src: "/images/reggel-napfeny.webp",
-        alt: "mono menthol drops üveg kőpulton, reggeli napfényben",
+        alt: "mono menthol drops üveg a fürdőszobai kőpulton, a falon ablakfénnyel",
         width: 1122,
         height: 1402,
-      },
-      {
-        src: "/images/reggel-furdoszoba.webp",
-        alt: "mono menthol drops üveg a fürdőszobai mosdó mellett",
-        width: 1122,
-        height: 1402,
-      },
-      {
-        src: "/images/klasszikus-doboz.webp",
-        alt: "mono menthol drops üveg és doboz",
-        width: 650,
-        height: 940,
       },
     ],
     pending: sharedPending,
@@ -161,30 +166,41 @@ export const products: Record<ProductId, Product> = {
       { label: "Doboz", value: "Mély erdőzöld texturált papírdoboz" },
     ],
     cardImage: {
-      src: "/images/este-ejjeliszekreny.webp",
-      alt: "mono sleep üveg fa éjjeliszekrényen, lámpafényben",
-      width: 1122,
-      height: 1402,
+      src: "/images/este-close.webp",
+      alt: "mono sleep üveg diófa éjjeliszekrényen, lámpafényben",
+      width: 1500,
+      height: 1950,
     },
-    cardFocus: "45% 60%",
     thumbImage: {
-      src: "/images/sleep-doboz.webp",
-      alt: "mono sleep üveg a mély erdőzöld papírdoboza előtt",
-      width: 650,
-      height: 940,
+      src: "/images/este-close.webp",
+      alt: "mono sleep üveg",
+      width: 1500,
+      height: 1950,
     },
     gallery: [
       {
-        src: "/images/este-ejjeliszekreny.webp",
-        alt: "mono sleep üveg fa éjjeliszekrényen, lámpafényben",
-        width: 1122,
-        height: 1402,
+        src: "/images/este-close.webp",
+        alt: "mono sleep üveg közelről, esti lámpafényben",
+        width: 1500,
+        height: 1950,
       },
       {
-        src: "/images/sleep-doboz.webp",
-        alt: "mono sleep üveg és doboz",
-        width: 650,
-        height: 940,
+        src: "/images/este-macro-label.webp",
+        alt: "A mély erdőzöld címke dombornyomott vonala közelről",
+        width: 1800,
+        height: 1200,
+      },
+      {
+        src: "/images/este-macro-cap.webp",
+        alt: "A bordázott kupak és a gumipipetta közelről, esti fényben",
+        width: 1800,
+        height: 1200,
+      },
+      {
+        src: "/images/este-ejjeliszekreny.webp",
+        alt: "mono sleep üveg az éjjeliszekrényen, mellette párna és takaró",
+        width: 1122,
+        height: 1402,
       },
     ],
     pending: sharedPending,
@@ -204,20 +220,26 @@ export const products: Record<ProductId, Product> = {
       "Mindkét üveg 30 ml-es, a saját dobozában.",
     ],
     cardImage: {
-      src: "/images/paros-csomag.webp",
-      alt: "mono menthol drops és mono sleep üveg a dobozaikkal",
-      width: 1568,
-      height: 1003,
+      src: "/images/paros-close.webp",
+      alt: "mono menthol drops és mono sleep üveg egymás mellett",
+      width: 1500,
+      height: 1950,
     },
     thumbImage: {
-      src: "/images/paros-csomag.webp",
-      alt: "mono menthol drops és mono sleep üveg a dobozaikkal",
-      width: 1568,
-      height: 1003,
+      src: "/images/paros-close.webp",
+      alt: "A két mono üveg",
+      width: 1500,
+      height: 1950,
     },
     heroImage: {
+      src: "/journey/paros-still.webp",
+      alt: "mono menthol drops és mono sleep üveg egymás mellett, kőszínű háttér előtt",
+      width: 2200,
+      height: 2200,
+    },
+    boxImage: {
       src: "/images/paros-csomag.webp",
-      alt: "mono menthol drops és mono sleep üveg a dobozaikkal",
+      alt: "A két üveg a dobozaikkal",
       width: 1568,
       height: 1003,
     },
