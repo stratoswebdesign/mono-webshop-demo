@@ -8,6 +8,7 @@ import { listSingles, productHref } from "@/lib/commerce/catalog";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { SmoothScroll } from "./SmoothScroll";
 
 interface ShellContext {
   tone: Tone;
@@ -58,6 +59,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <Context.Provider value={value}>
+      <SmoothScroll />
       <div data-tone={tone} className="tone-root flex min-h-dvh flex-col bg-bg text-fg">
         <a
           href="#tartalom"

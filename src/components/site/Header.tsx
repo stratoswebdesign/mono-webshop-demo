@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { mainNav, secondaryNav } from "@/data/site";
 import { normalizePath } from "@/lib/asset";
+import { lockScroll, unlockScroll } from "@/lib/smooth-scroll";
 import { useCart } from "@/lib/commerce/cart-store";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
@@ -27,10 +28,10 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
     };
-    document.body.style.overflow = "hidden";
+    lockScroll();
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "";
+      unlockScroll();
       window.removeEventListener("keydown", onKey);
     };
   }, [menuOpen]);
@@ -119,6 +120,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
         <nav
           id="mobil-menu"
           aria-label="Mobil navigáció"
+          data-lenis-prevent
           className="absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto bg-bg lg:hidden"
         >
           <ul className="wrap flex flex-col pb-10 pt-8">

@@ -96,6 +96,10 @@ src/
 - **Fokozatos betöltés** (`SceneStage.tsx`): azonnal megjelenik a jelenet renderelt képe
   (ugyanabból a kamerából), a three.js csak tétlen időben és láthatóvá váláskor töltődik.
   WebGL-hiba esetén a renderelt kép marad.
+- **Sima görgetés** (`components/site/SmoothScroll.tsx`, Lenis): egérrel és érintőpaddal a
+  görgetés lágyan fut ki, a 3D kamera ehhez igazodva követ. Kosárfióknál és mobilmenünél a
+  háttér görgetése zárolva van (`lib/smooth-scroll.ts`); érintőképernyőn a böngésző saját
+  lendülete marad.
 - **Csökkentett mozgás / WebGL nélkül** a főoldal ugyanazt a történetet álló, renderelt képekkel
   mutatja (`JourneyStatic.tsx`). Ha a képkockasebesség tartósan alacsony, a jelenet egyszerűbb
   üveganyagra és kisebb felbontásra vált.

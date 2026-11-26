@@ -17,6 +17,7 @@ import { PerformanceMonitor, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader.js";
 import { asset } from "@/lib/asset";
+import { scrollIsSmoothed } from "@/lib/smooth-scroll";
 import { createLabelTextures, type LabelTextures } from "./label-textures";
 import { CAMERA, PAIR_OFFSET, SCENES, type SceneId, type Shot } from "./scene-config";
 
@@ -383,8 +384,10 @@ function World({
     const shot = direct(state.clock.elapsedTime, delta, size);
     const s = smooth.current;
 
-    // ── Simítás (az első képkockán azonnal a helyére ugrik)
-    const k = s.ready ? 1 : 1e6;
+    // ── Simítás (az első képkockán azonnal a helyére ugrik). Ha a görgetést
+    // már a Lenis simítja, a kamera szorosabban követ – különben a két késés
+    // összeadódna, és a kép „úszna” a görgetés után.
+    const k = s.ready ? (scrollIsSmoothed() ? 1.9 : 1) : 1e6;
     s.zoom = Math.exp(damp(Math.log(s.zoom), Math.log(shot.zoom), 4.2 * k, delta));
     s.pair = damp(s.pair, shot.pair, 9 * k, delta);
     s.follow = damp(s.follow, shot.followMain ? 1 : 0, 4.2 * k, delta);

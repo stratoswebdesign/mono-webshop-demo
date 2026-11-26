@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useCart } from "@/lib/commerce/cart-store";
+import { lockScroll, unlockScroll } from "@/lib/smooth-scroll";
 import { BundleHint, CartLines, FreeShippingMeter, TotalsRows } from "./CartParts";
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -18,16 +19,15 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
   useEffect(() => {
     if (!open) return;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    lockScroll();
+    return unlockScroll;
   }, [open]);
 
   return (
     <dialog
       ref={ref}
       className="drawer"
+      data-lenis-prevent
       aria-labelledby="kosarfiok-cim"
       onClose={onClose}
       onClick={(event) => {
